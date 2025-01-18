@@ -7,12 +7,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCLLdCJjrXUzAI7tlfvOoiNmZN4unZo9l8",
-  authDomain: "urbanestate-dbfe4.firebaseapp.com",
-  projectId: "urbanestate-dbfe4",
-  storageBucket: "urbanestate-dbfe4.firebasestorage.app",
-  messagingSenderId: "39124381222",
-  appId: "1:39124381222:web:7aeaa724905ad8f94280e7",
+  apiKey:import.meta.env.Vite_apiKey, 
+  authDomain:import.meta.env.Vite_authDomain, 
+  projectId:import.meta.env.Vite_projectId, 
+  storageBucket:import.meta.env.Vite_storageBucket, 
+  messagingSenderId:import.meta.env.Vite_messagingSenderId, 
+  appId:import.meta.env.Vite_appId, 
 };
 
 // Initialize Firebase
