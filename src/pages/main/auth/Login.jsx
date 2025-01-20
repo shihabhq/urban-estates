@@ -7,51 +7,54 @@ import Input from "../../../shared/Input";
 import { toast } from "react-toastify";
 import AuthContext from "../../../contexts/AuthContexts";
 import Heading from "../../../shared/Heading";
+import useAxiosNormal from "../../../hooks/useAxiosNormal";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setLoading, setUser, loginUser, loginWithGoogle, user } =
-    useContext(AuthContext);
+  const { setLoading, loginUser, googleLogin, user } = useContext(AuthContext);
   const location = useLocation();
+  const { axiosPublic } = useAxiosNormal();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email || !password) {
-      toast.error("Please fill in all fields", { position: "top-center" });
+      toast.error("Please fill in all fields");
       return;
     }
     loginUser(email, password)
       .then(() => {
-        toast.success("User LoggedIn successfully", { position: "top-center" });
+        toast.success("User LoggedIn successfully");
         navigate(location?.state ? location.state : "/");
       })
       .catch((err) => {
-        toast.error("Error Occured: " + err, { position: "top-center" });
+        toast.error("Error Occured: " + err);
       })
       .finally(() => {
         setLoading(false);
       });
   };
 
-  const handleGoogleLogin = () => {
-    loginWithGoogle()
-      .then((result) => {
-        setUser(result.user);
-        toast.success("User Logged in successfully", {
-          position: "top-center",
-        });
-        navigate(location?.state ? location.state : "/");
-      })
-      .catch((err) => {
-        toast.error("Unexpected Error Occured" + err, {
-          position: "top-center",
-        });
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+  const handleGoogleLogin = async () => {
+    try {
+      const currentUser = await googleLogin();
+      const user = currentUser.user;
+      const authInfo = {
+        name: user.displayName,
+        email: user?.email,
+        role: "user",
+      };
+
+      await axiosPublic.post("/users", authInfo);
+      navigate("/");
+
+      toast.success("User added successfully");
+    } catch (error) {
+      toast.error("Error during Google login.");
+    } finally {
+      setLoading(false);
+    }
   };
   if (user) {
     return (
@@ -75,7 +78,7 @@ const Login = () => {
         <div className="bg-white py-8 px-4 shadow rounded-lg sm:px-10">
           <div className="sm:mx-auto sm:w-full sm:max-w-md">
             <h2 className="mt-6 text-btncol text-center text-3xl font-extrabold">
-              Login to your account 
+              Login to your account
             </h2>
           </div>
           <form className=" mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -123,7 +126,7 @@ const Login = () => {
                 onClick={handleGoogleLogin}
                 className="w-full flex justify-center py-2 px-4 border rounded-md shadow-sm text-sm font-medium bg-white border-btncol transition-all text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 hover:bg-btncol hover:text-white focus:ring-btncol">
                 <FaGoogle className="mr-2 h-5 w-5" />
-                Sign in with Google 
+                Sign in with Google
               </button>
             </div>
           </div>

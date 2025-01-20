@@ -16,15 +16,8 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [photo, setPhoto] = useState("");
-  const {
-    user,
-    loading,
-    createUser,
-
-    setLoading,
-    googleLogin,
-    updateUser,
-  } = useContext(AuthContext);
+  const { user, loading, createUser, setLoading, googleLogin, updateUser } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const { axiosPublic } = useAxiosNormal();
@@ -55,7 +48,7 @@ const Register = () => {
 
       return;
     }
-
+    setError("");
     try {
       const photoURL = await uploadImage(photo);
       if (!photoURL) {
@@ -91,7 +84,7 @@ const Register = () => {
         import.meta.env.VITE_CLOUDINARY_URL,
         formData
       );
-      const imageURL = res.data.secure_url; 
+      const imageURL = res.data.secure_url;
       console.log(imageURL);
       return imageURL;
     } catch (error) {
@@ -115,23 +108,25 @@ const Register = () => {
     }
   };
 
-  const handleGoogleRegistration = () => {
-    googleLogin()
-      .then(() => {
-        toast.success("Account added Successfully", {
-          position: "top-center",
-        });
-        navigate("/");
-      })
-      .catch((err) => {
-        toast.error("Unexpected Error Occured" + err, {
-          position: "top-center",
-        });
-      })
-      .finally(() => {
-        setLoading(false);
-        setError("");
-      });
+  const handleGoogleRegistration = async () => {
+    try {
+      const currentUser = await googleLogin();
+      const user = currentUser.user;
+      const authInfo = {
+        name: user.displayName,
+        email: user?.email,
+        role: "user",
+      };
+
+      await axiosPublic.post("/users", authInfo);
+
+      toast.success("User added successfully");
+    } catch (error) {
+      toast.error("Error during Google login.");
+    } finally {
+      setError("");
+      setLoading(false);
+    }
   };
 
   if (loading) {
@@ -256,3 +251,18 @@ const Register = () => {
 };
 
 export default Register;
+
+// googleLogin()
+// .then(() => {
+//   toast.success("Account added Successfully");
+//   navigate("/");
+// })
+// .catch((err) => {
+//   toast.error("Unexpected Error Occured" + err, {
+//     position: "top-center",
+//   });
+// })
+// .finally(() => {
+//   setLoading(false);
+//   setError("");
+// });
