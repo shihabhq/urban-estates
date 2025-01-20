@@ -31,7 +31,7 @@ const AuthProvider = ({ children }) => {
   };
   const updateUser = (updateData) => {
     setLoading(true);
-    return updateProfile(auth, updateData);
+    return updateProfile(auth.currentUser, updateData);
   };
   const logOut = () => {
     setLoading(true);
@@ -46,9 +46,11 @@ const AuthProvider = ({ children }) => {
       //   const user = { email: currentUser.email }
 
       // }
+      console.log(user);
+      setLoading(false);
     });
     return () => unsubscribe();
-  }, []);
+  }, [user]);
 
   const authInfo = {
     user,
@@ -56,6 +58,7 @@ const AuthProvider = ({ children }) => {
     loginUser,
     createUser,
     logOut,
+    setLoading,
     googleLogin,
     updateUser,
   };
