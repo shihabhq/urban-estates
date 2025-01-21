@@ -6,6 +6,19 @@ import Login from "../pages/main/auth/Login";
 import Register from "../pages/main/auth/Register";
 import PrivateRoute from "./PrivateRoute";
 import Home from "../pages/main/Home/Home";
+import DashboardLayout from "../layouts/DashboardLayout";
+import Notfound from "../pages/Notfound";
+import Profile from "../pages/dashboard/Profile";
+import WishList from "../pages/dashboard/User/WishList";
+import PropertiesBought from "../pages/dashboard/User/PropertiesBought";
+import MyReviews from "../pages/dashboard/User/MyReviews";
+import ManageProperties from "../pages/dashboard/Admin/ManageProperties";
+import ManageUsers from "../pages/dashboard/Admin/ManageUsers";
+import ManageReviews from "../pages/dashboard/Admin/ManageReviews";
+import AddProperty from "../pages/dashboard/Agent/AddProperty";
+import AddedProperties from "../pages/dashboard/Agent/AddedProperties";
+import RequestedProperties from "../pages/dashboard/Agent/RequestedProperties";
+import SoldProperties from "../pages/dashboard/Agent/SoldProperties";
 
 const AllRoutes = () => {
   return (
@@ -22,6 +35,22 @@ const AllRoutes = () => {
         />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+        <Route path="*" element={<Notfound />} />
+      </Route>
+      <Route path="/dashboard" element={<DashboardLayout />}>
+        <Route path="profile" element={<Profile />} />
+        <Route path="wishlist" element={<WishList />} />
+        <Route path="bought" element={<PropertiesBought />} />
+        <Route path="my-reviews" element={<MyReviews />} />
+        <Route path="manage-properties" element={<ManageProperties />} />
+        <Route path="manage-users" element={<ManageUsers />} />
+        <Route path="manage-reviews" element={<ManageReviews />} />
+        <Route path="add-property" element={<AddProperty />} />
+        <Route path="added-properties" element={<AddedProperties />} />
+        <Route path="requested-properties" element={<RequestedProperties />} />
+        <Route path="sold-properties" element={<SoldProperties />} />
+
+        <Route path="*" element={<Notfound />} />
       </Route>
     </Routes>
   );

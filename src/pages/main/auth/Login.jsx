@@ -17,23 +17,22 @@ const Login = () => {
   const { axiosPublic } = useAxiosNormal();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       toast.error("Please fill in all fields");
       return;
     }
-    loginUser(email, password)
-      .then(() => {
-        toast.success("User LoggedIn successfully");
-        navigate(location?.state ? location.state : "/");
-      })
-      .catch((err) => {
-        toast.error("Error Occured: " + err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+
+    try {
+      await loginUser(email, password);
+      toast.success("User LoggedIn successfully");
+      navigate(location?.state ? location.state : "/");
+    } catch (err) {
+      toast.error("Error Occured: " + err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleGoogleLogin = async () => {
@@ -50,7 +49,7 @@ const Login = () => {
       navigate("/");
 
       toast.success("User added successfully");
-    } catch (error) {
+    } catch (e) {
       toast.error("Error during Google login.");
     } finally {
       setLoading(false);

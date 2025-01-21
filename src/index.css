@@ -6,8 +6,8 @@
 * {
   font-family: "Arial", sans-serif;
 }
-.active-nav{
-  color:#f1913d !important
+.active-nav {
+  color: #f1913d !important;
 }
 
 input:-webkit-autofill {
@@ -18,5 +18,8 @@ input:-webkit-autofill {
 .menu li > *:not(ul, .menu-title, details, .btn):active {
   background-color: inherit !important;
   color: #f1913d !important;
-
+}
+.active-dash {
+  background-color: #2d2e33 !important;
+  color: white !important;
 }
