@@ -71,7 +71,7 @@ const DashboardNav = ({ open, setOpen }) => {
         <DashboardBtn
           icon={<PiBuildingsBold />}
           name="Add Property"
-          to="/dashboard/add-properties"
+          to="/dashboard/add-property"
         />
         <DashboardBtn
           icon={<MdOutlineAddBusiness />}

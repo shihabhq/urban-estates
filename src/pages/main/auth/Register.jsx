@@ -64,7 +64,8 @@ const Register = () => {
       };
       await axiosPublic.post("/users", userInfo);
 
-      toast.success("successfully created user");
+      toast.success("successfully created Account");
+      navigate("/");
     } catch (error) {
       console.log(error);
       toast.error("Unexpected error occured While creating user");
@@ -85,7 +86,7 @@ const Register = () => {
         formData
       );
       const imageURL = res.data.secure_url;
-      console.log(imageURL);
+     
       return imageURL;
     } catch (error) {
       throw new Error("Image upload failed", error);
@@ -121,6 +122,7 @@ const Register = () => {
       await axiosPublic.post("/users", authInfo);
 
       toast.success("User added successfully");
+      navigate("/");
     } catch (error) {
       toast.error("Error during Google login.");
     } finally {

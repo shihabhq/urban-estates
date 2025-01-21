@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import AuthContext from "../../contexts/AuthContexts";
 import Loading from "../../shared/Loading";
-import Heading from "../../shared/Heading";
+
 
 const Profile = () => {
   const { user, loading } = useContext(AuthContext);
@@ -17,7 +17,7 @@ const Profile = () => {
         <div className="flex flex-col gap-4">
           <div>
             <h1 className="mb-2 text-xl font-semibold">Image:</h1>
-            <img src={user.photoURL} className="max-w-xl w-[90%]" alt="" />
+            <img src={user?.photoURL} className="max-w-xl w-[90%]" alt="" />
           </div>
           <div>
             <h1 className="text-2xl font-medium"> {user?.displayName}</h1>

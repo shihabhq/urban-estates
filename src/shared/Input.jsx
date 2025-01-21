@@ -1,9 +1,9 @@
 const Input = ({ label, title, type, value, onChange, placeholder }) => {
   return (
-    <div>
+    <div className="w-full">
       <label
         htmlFor={label}
-        className="block text-sm font-medium text-gray-700">
+        className="block text-sm font-semibold text-gray-700">
         {title}
       </label>
       <div className="mt-1">
