@@ -15,7 +15,7 @@ const DashboardLayout = () => {
   };
 
   return (
-    <div className="min-h-screen relative flex">
+    <div className="min-h-screen relative flex overflow-hidden">
       {open && (
         <div
           className="fixed inset-0 bg-black bg-opacity-30 z-40 md:hidden"
@@ -29,11 +29,11 @@ const DashboardLayout = () => {
         <FaBars size={28} />
       </div>
 
-      <div>
+      <div className="min-w-fit">
         <DashboardNav open={open} setOpen={setOpen} />
       </div>
 
-      <div className="flex-grow">
+      <div className="flex-grow w-full ">
         <Outlet />
       </div>
     </div>
