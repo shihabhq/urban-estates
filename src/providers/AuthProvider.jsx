@@ -56,7 +56,17 @@ const AuthProvider = ({ children }) => {
           //     localStorage.setItem("token", res.data.token);
           //   }
           // });
-          const updatedUser = { ...currentUser, role: role || "user" };
+          let updatedUser;
+          if (role === "agent") {
+            const fraud = await axiosPublic.get("/user-fraud", userInfo);
+            updatedUser = {
+              ...currentUser,
+              role: role || "user",
+              fraud: fraud || false,
+            };
+          } else {
+            updatedUser = { ...currentUser, role: role || "user" };
+          }
 
           setUser(updatedUser);
         } catch (error) {
