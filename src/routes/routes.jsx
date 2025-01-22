@@ -19,6 +19,7 @@ import AddProperty from "../pages/dashboard/Agent/AddProperty";
 import AddedProperties from "../pages/dashboard/Agent/AddedProperties";
 import RequestedProperties from "../pages/dashboard/Agent/RequestedProperties";
 import SoldProperties from "../pages/dashboard/Agent/SoldProperties";
+import UpdateProperty from "../pages/dashboard/Agent/UpdateProperty";
 
 const AllRoutes = () => {
   return (
@@ -49,6 +50,7 @@ const AllRoutes = () => {
         <Route path="added-properties" element={<AddedProperties />} />
         <Route path="requested-properties" element={<RequestedProperties />} />
         <Route path="sold-properties" element={<SoldProperties />} />
+        <Route path="update/:id" element={<UpdateProperty />} />
 
         <Route path="*" element={<Notfound />} />
       </Route>

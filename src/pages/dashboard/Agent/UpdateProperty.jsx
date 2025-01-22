@@ -1,25 +1,33 @@
-import React, { useContext, useState } from "react";
-import AuthContext from "../../../contexts/AuthContexts";
-import Loading from "../../../shared/Loading";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
 import Input from "../../../shared/Input";
-import ButtonCovered from "../../../shared/ButtonCovered";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import axios from "axios";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useNavigate } from "react-router";
+import ButtonCovered from "../../../shared/ButtonCovered";
 
-const AddProperty = () => {
-  const { user, loading, setLoading } = useContext(AuthContext);
+const UpdateProperty = () => {
+  const { id } = useParams();
   const { axiosSecure } = useAxiosSecure();
-  const navigate = useNavigate();
-  const [propertyObj, setPropertyObj] = useState({
-    title: "",
-    location: "",
-    min: "",
-    max: "",
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["update-property"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/properties/update/${id}`);
+      return res.data;
+    },
   });
+
+  const navigate = useNavigate();
+  const [propertyObj, setPropertyObj] = useState(null);
   const [photo, setPhoto] = useState(null);
-  const [previewImage, setPreviewImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState("");
+
+  useEffect(() => {
+    setPropertyObj(data);
+    setPreviewImage(data?.image);
+  }, [data]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -52,72 +60,58 @@ const AddProperty = () => {
       throw new Error("Image upload failed", e);
     }
   };
-  const handleAddProperty = async () => {
-    const { title, location, min, max } = propertyObj;
-    if (!title || !location || !min || !max || !photo) {
+
+  const handleUpdateProperty = async () => {
+    const { title, location, price } = propertyObj;
+    if (!title || !location || !price?.min || !price?.max) {
       return toast.error("Please fill all the fields");
     }
-    if (Number(min) > Number(max)) {
+    if (Number(price?.min) > Number(price?.max)) {
       return toast.error("Minimum price should be less than maximum price");
     }
-    if (Number(min) < 0 || Number(max) < 0) {
+    if (Number(price?.min) < 0 || Number(price?.max) < 0) {
       return toast.error("Price should be greater than 0");
     }
-    if (Number(min) === 0 || Number(max) === 0) {
+    if (Number(price?.min) === 0 || Number(price?.max) === 0) {
       return toast.error("Price should be greater than 0");
     }
-    if (Number(min) === Number(max)) {
+    if (Number(price?.min) === Number(price?.max)) {
       return toast.error("Price should not be equal");
     }
-
     try {
-      setLoading(true);
-      const photoURL = await uploadImage(photo);
-      console.log(photoURL);
-      const property = {
-        title: title,
-        location: location,
+      let imageUrl = propertyObj?.image;
+
+      if (photo) {
+        imageUrl = await uploadImage(photo);
+        if (!imageUrl) {
+          return toast.error("Image upload failed");
+        }
+      }
+
+      const updatedProperty = {
+        ...propertyObj,
         price: {
-          min: Number(min),
-          max: Number(max),
+          min: Number(propertyObj.price.min),
+          max: Number(propertyObj.price.max),
         },
-        photo: photoURL,
-        agent: {
-          name: user?.displayName,
-          email: user?.email,
-          image: user?.photoURL,
-        },
-        status: "pending",
+        image: imageUrl,
       };
-      await axiosSecure.post("/add-property", property);
-      toast.success("successfully Added Property");
+      console.log(updatedProperty);
+      await axiosSecure.put("/properties/update", updatedProperty);
+      toast.success("Property updated successfully");
       navigate("/dashboard/added-properties");
-    } catch (error) {
-      console.log(error);
-      toast.error(
-        "There was an error while adding property. Please try again later"
-      );
-    } finally {
-      setLoading(false);
-      setPropertyObj({
-        title: "",
-        location: "",
-        min: "",
-        max: "",
-      });
+    } catch (e) {
+      console.log(e)
+      toast.error("Unexpected error occured while updating property");
     }
-    setPhoto(null);
   };
 
-  if (loading) {
-    return <Loading />;
-  }
   return (
     <div className="container mx-auto">
       <div className="my-24 border max-w-2xl  border-gray-200 px-4 pt-10 pb-4 rounded-md md:w-[80%] mx-auto">
         <div className="flex flex-col gap-4">
           <h1 className="text-2xl sm:text-4xl text-center font-bold mb-4">
-            Add Property
+            Update Property
           </h1>
           <div className="w-full flex gap-4">
             <Input
@@ -125,7 +119,7 @@ const AddProperty = () => {
               placeholder={"Property Title"}
               title={"Title"}
               type={"text"}
-              value={propertyObj.title}
+              value={propertyObj?.title}
               onChange={(e) =>
                 setPropertyObj({ ...propertyObj, title: e.target.value })
               }
@@ -135,7 +129,7 @@ const AddProperty = () => {
               placeholder={"Property Location"}
               title={"Location"}
               type={"text"}
-              value={propertyObj.location}
+              value={propertyObj?.location}
               onChange={(e) =>
                 setPropertyObj({ ...propertyObj, location: e.target.value })
               }
@@ -154,29 +148,37 @@ const AddProperty = () => {
               id="upload-property"
               onChange={handleImageChange}
             />
-            {previewImage && (
-              <img
-                src={previewImage}
-                className=" min-w-32 min-h-32  object-cover border-2 border-btncol"
-              />
-            )}
+
+            <img
+              src={previewImage}
+              className=" min-w-32 min-h-32  object-cover border-2 border-btncol"
+            />
           </div>
           <div>
             <h1 className="text-lg font-semibold">Price Range:</h1>
             <div className="w-full flex gap-4 my-1">
               <Input
                 label={"min"}
-                value={propertyObj.min}
+                value={propertyObj?.price.min}
                 onChange={(e) =>
-                  setPropertyObj({ ...propertyObj, min: e.target.value })
+                  setPropertyObj({
+                    ...propertyObj,
+                    price: { ...propertyObj.price, min: e.target.value },
+                  })
                 }
                 placeholder={"Min"}
                 type={"number"}
               />
               <Input
-                value={propertyObj.max}
+                value={propertyObj?.price.max}
                 onChange={(e) =>
-                  setPropertyObj({ ...propertyObj, max: e.target.value })
+                  setPropertyObj({
+                    ...propertyObj,
+                    price: {
+                      ...propertyObj.price,
+                      max: e.target.value,
+                    },
+                  })
                 }
                 label={"max"}
                 placeholder={"Max"}
@@ -186,18 +188,18 @@ const AddProperty = () => {
           </div>
           <div>
             <h1 className="text-lg font-semibold">Agent Info:</h1>
-            <div className="grid gap-4 w-full lg:grid-cols-2">
-              <h1 className="text-sm sm:text-xl">
+            <div className="grid gap-4 w-full grid-cols-2">
+              <h1 className="text-xl">
                 <span className="text-sm font-semibold">Name:</span> <br />{" "}
-                {user?.displayName}
+                {data?.agent.name}
               </h1>
-              <h1 className="text-base sm:text-xl">
-                <span className="text-sm font-semibold">Email:</span> <br />{" "}
-                {user?.email}
+              <h1 className="text-xl">
+                <span className="text-sm font-semibold">Email:</span>{" "}
+                {data?.agent.email}
               </h1>
             </div>
           </div>
-          <div onClick={handleAddProperty}>
+          <div onClick={handleUpdateProperty}>
             <ButtonCovered to={"#"}>Add Property</ButtonCovered>
           </div>
         </div>
@@ -206,4 +208,4 @@ const AddProperty = () => {
   );
 };
 
-export default AddProperty;
+export default UpdateProperty;
