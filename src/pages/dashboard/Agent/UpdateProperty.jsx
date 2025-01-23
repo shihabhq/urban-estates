@@ -96,12 +96,12 @@ const UpdateProperty = () => {
         },
         image: imageUrl,
       };
-      console.log(updatedProperty);
+
       await axiosSecure.put("/properties/update", updatedProperty);
       toast.success("Property updated successfully");
       navigate("/dashboard/added-properties");
     } catch (e) {
-      console.log(e)
+      console.log(e);
       toast.error("Unexpected error occured while updating property");
     }
   };
@@ -155,6 +155,15 @@ const UpdateProperty = () => {
             />
           </div>
           <div>
+            <textarea
+              className="textarea border border-gray-300 w-full min-h-44 focus:outline-none focus:border-btncol"
+              placeholder="Bio"
+              value={propertyObj?.description}
+              onChange={(e) =>
+                setPropertyObj({ ...propertyObj, description: e.target.value })
+              }></textarea>
+          </div>
+          <div>
             <h1 className="text-lg font-semibold">Price Range:</h1>
             <div className="w-full flex gap-4 my-1">
               <Input
@@ -194,13 +203,13 @@ const UpdateProperty = () => {
                 {data?.agent.name}
               </h1>
               <h1 className="text-xl">
-                <span className="text-sm font-semibold">Email:</span>{" "}
+                <span className="text-sm font-semibold">Email:</span> <br />{" "}
                 {data?.agent.email}
               </h1>
             </div>
           </div>
           <div onClick={handleUpdateProperty}>
-            <ButtonCovered to={"#"}>Add Property</ButtonCovered>
+            <ButtonCovered to={"#"}>Update</ButtonCovered>
           </div>
         </div>
       </div>

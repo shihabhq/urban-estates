@@ -11,11 +11,10 @@ import { toast } from "react-toastify";
 const AddedProperties = () => {
   const { axiosSecure } = useAxiosSecure();
   const { user, loading } = useContext(AuthContext);
-  console.log(user?.email);
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["properties"],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/properties/${user.email}`); //user takes some time to come and for this the user.email is undefined or null at first. and the returned data is empty but I want the user email to be there for the query
+      const res = await axiosSecure.get(`/properties/${user.email}`); 
       return res.data;
     },
     enabled: !!user?.email,
@@ -42,7 +41,7 @@ const AddedProperties = () => {
       <div>
         <Heading largeHead={"Your Added Products"} />
       </div>
-      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
         {data.map((property) => {
           return (
             <AddedPropertyCard

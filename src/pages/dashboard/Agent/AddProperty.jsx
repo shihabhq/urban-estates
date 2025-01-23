@@ -17,6 +17,7 @@ const AddProperty = () => {
     location: "",
     min: "",
     max: "",
+    description: "",
   });
   const [photo, setPhoto] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
@@ -53,8 +54,8 @@ const AddProperty = () => {
     }
   };
   const handleAddProperty = async () => {
-    const { title, location, min, max } = propertyObj;
-    if (!title || !location || !min || !max || !photo) {
+    const { title, location, min, max, description } = propertyObj;
+    if (!title || !location || !min || !max || !photo || !description) {
       return toast.error("Please fill all the fields");
     }
     if (Number(min) > Number(max)) {
@@ -87,6 +88,7 @@ const AddProperty = () => {
           email: user?.email,
           image: user?.photoURL,
         },
+        description: description,
         status: "pending",
       };
       await axiosSecure.post("/add-property", property);
@@ -104,9 +106,11 @@ const AddProperty = () => {
         location: "",
         min: "",
         max: "",
+        description: "",
       });
     }
     setPhoto(null);
+    setPreviewImage(null);
   };
 
   if (loading) {
@@ -141,6 +145,7 @@ const AddProperty = () => {
               }
             />
           </div>
+
           <div className=" max-w-fit mx-auto flex items-center justify-center gap-4 flex-col">
             <label
               className="font-arial font-semibold flex items-center justify-center gap-3 px-3 py-2 hover:bg-btncol hover:text-white text-btncol border border-btncol rounded-md text-lg transition-all duration-200 cursor-pointer"
@@ -160,6 +165,15 @@ const AddProperty = () => {
                 className=" min-w-32 min-h-32  object-cover border-2 border-btncol"
               />
             )}
+          </div>
+          <div>
+            <textarea
+              className="textarea border border-gray-300 w-full min-h-44 focus:outline-none focus:border-btncol"
+              placeholder="Bio"
+              value={propertyObj.description}
+              onChange={(e) =>
+                setPropertyObj({ ...propertyObj, description: e.target.value })
+              }></textarea>
           </div>
           <div>
             <h1 className="text-lg font-semibold">Price Range:</h1>

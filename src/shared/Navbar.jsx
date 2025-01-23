@@ -87,7 +87,7 @@ const Navbar = () => {
             ) : (
               <ButtonOutlined to={"/login"}>Login</ButtonOutlined>
             )}
-            <ButtonOutlined to={"/dashboard"}>Dashboard</ButtonOutlined>
+            <ButtonOutlined to={"/dashboard/profile"}>Dashboard</ButtonOutlined>
           </div>
         </div>
       </div>

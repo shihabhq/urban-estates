@@ -20,6 +20,7 @@ import AddedProperties from "../pages/dashboard/Agent/AddedProperties";
 import RequestedProperties from "../pages/dashboard/Agent/RequestedProperties";
 import SoldProperties from "../pages/dashboard/Agent/SoldProperties";
 import UpdateProperty from "../pages/dashboard/Agent/UpdateProperty";
+import PropertyDetails from "../pages/main/PropertyDetails";
 
 const AllRoutes = () => {
   return (
@@ -34,12 +35,27 @@ const AllRoutes = () => {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/details/:id"
+          element={
+            <PrivateRoute>
+              <PropertyDetails />
+            </PrivateRoute>
+          }
+        />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="*" element={<Notfound />} />
       </Route>
       <Route path="/dashboard" element={<DashboardLayout />}>
-        <Route path="profile" element={<Profile />} />
+        <Route
+          path="profile"
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        />
         <Route path="wishlist" element={<WishList />} />
         <Route path="bought" element={<PropertiesBought />} />
         <Route path="my-reviews" element={<MyReviews />} />

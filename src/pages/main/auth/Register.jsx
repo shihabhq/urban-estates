@@ -5,7 +5,6 @@ import { Link, Navigate, useNavigate } from "react-router";
 import Input from "../../../shared/Input";
 import { toast } from "react-toastify";
 import AuthContext from "../../../contexts/AuthContexts";
-import Heading from "../../../shared/Heading";
 import axios from "axios";
 import Loading from "../../../shared/Loading";
 import useAxiosNormal from "../../../hooks/useAxiosNormal";
@@ -28,7 +27,7 @@ const Register = () => {
   const specialCharacterRegex = /[!@#$%^&*(),.?":{}|<>]/;
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+
     if (!name || !photo || !email || !password) {
       setError("Please fill up all the fields and upload image");
       return;
@@ -86,7 +85,7 @@ const Register = () => {
         formData
       );
       const imageURL = res.data.secure_url;
-     
+
       return imageURL;
     } catch (error) {
       throw new Error("Image upload failed", error);
@@ -124,6 +123,7 @@ const Register = () => {
       toast.success("User added successfully");
       navigate("/");
     } catch (error) {
+      console.log(error);
       toast.error("Error during Google login.");
     } finally {
       setError("");
@@ -145,7 +145,7 @@ const Register = () => {
         className="absolute inset-0 bg-cover bg-center -z-10"
         style={{
           backgroundImage:
-            "url('https://turismo.antequera.es/wp-content/uploads/2023/04/pexels-robin-stickel-70497.jpg)",
+            "url('https://th.bing.com/th/id/R.6405efc53e267b121f3c5965b6d0ea3f?rik=i1UOgy64UFRz9w&pid=ImgRaw&r=0')",
         }}>
         <div className="absolute inset-0 bg-black bg-opacity-80"></div>
       </div>
@@ -156,7 +156,7 @@ const Register = () => {
               New User Register
             </h2>
           </div>
-          <form className=" mt-8 space-y-6" onSubmit={handleSubmit}>
+          <div className=" mt-8 space-y-6" onSubmit={handleSubmit}>
             <Input
               label={"username"}
               title={"Enter your name"}
@@ -208,13 +208,13 @@ const Register = () => {
 
             <div>
               <button
-                type="Submit"
+                onClick={handleSubmit}
                 className="block px-6 py-2 border border-btncol font-medium text-white bg-btncol text-lg hover:bg-inherit font-poppins rounded-sm hover:text-btncol transition-all text-center duration-200 w-full">
                 Register
               </button>
               <p className="text-sm text-red-500 ">{error && error}</p>
             </div>
-          </form>
+          </div>
 
           <div className="mt-6">
             <div className="relative">

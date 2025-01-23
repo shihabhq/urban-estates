@@ -49,7 +49,7 @@ const ManageProperties = () => {
 
   return (
     <>
-      <Heading largeHead={"Your added products"} />
+      <Heading largeHead={"Manage Properties"} />
       <div className="overflow-x-auto mx-auto w-[90%]">
         <table className="table">
           {/* head */}
@@ -63,10 +63,14 @@ const ManageProperties = () => {
             </tr>
           </thead>
           <tbody>
-
             {properties.map((property) => {
               return (
-                <ManagePropertyCard key={property._id} property={property} />
+                <ManagePropertyCard
+                  handleVerify={() => handleVerify(property._id)}
+                  handleReject={() => handleReject(property._id)}
+                  key={property._id}
+                  property={property}
+                />
               );
             })}
           </tbody>
