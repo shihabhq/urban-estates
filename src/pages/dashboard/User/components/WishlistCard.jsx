@@ -2,7 +2,7 @@ import React from "react";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { Link } from "react-router";
 
-const WishlistCard = ({ property,handleDelete }) => {
+const WishlistCard = ({ property, handleDelete,id }) => {
   return (
     <div className="card card-compact mx-auto w-full bg-base-100 max-w-96 shadow-xl">
       <figure>
@@ -48,12 +48,14 @@ const WishlistCard = ({ property,handleDelete }) => {
           </div>
         </div>
         <div className="card-actions justify-end gap-3">
-          <button onClick={handleDelete} className="px-4 py-2 rounded-md text-red-500 text-sm font-semibold cursor-pointer border border-red-500 hover:bg-red-500 hover:text-white transition-all">
+          <button
+            onClick={handleDelete}
+            className="px-4 py-2 rounded-md text-red-500 text-sm font-semibold cursor-pointer border border-red-500 hover:bg-red-500 hover:text-white transition-all">
             Remove
           </button>
 
           <Link
-            to={`/dashboard/offer/${property._id}`}
+            to={`/dashboard/offer/${id}`}
             className="px-4 py-2 rounded-md text-btnsuccess text-sm font-semibold cursor-pointer border border-btnsuccess hover:bg-btnsuccess hover:text-white transition-all">
             Make an Offer
           </Link>

@@ -30,6 +30,9 @@ const WishList = () => {
   if (loading || isLoading) {
     return <Loading />;
   }
+  if (!data || Object.keys(data).length === 0) {
+    return <Heading largeHead={'Nothing is in wishlist'} />
+  }
   return (
     <div>
       <Heading largeHead={"My Wishlists"} />
@@ -40,6 +43,7 @@ const WishList = () => {
               handleDelete={() => handleRemove(wishlist._id)}
               property={wishlist.propertyId}
               key={wishlist._id}
+              id={wishlist._id}
             />
           );
         })}

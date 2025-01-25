@@ -123,7 +123,7 @@ const PropertyDetails = () => {
               </div>
             </div>
 
-            {user?.role === "agent" ? (
+            {user?.role === "user" ? (
               <div className="flex gap-2 items-center justify-end">
                 <div onClick={handleAddToWishlist} aria-disabled={updating}>
                   <ButtonCovered>
