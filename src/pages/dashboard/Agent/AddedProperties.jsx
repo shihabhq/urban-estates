@@ -41,7 +41,7 @@ const AddedProperties = () => {
       <div>
         <Heading largeHead={"Your Added Products"} />
       </div>
-      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div className="container px-4 mx-auto grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
         {data.map((property) => {
           return (
             <AddedPropertyCard

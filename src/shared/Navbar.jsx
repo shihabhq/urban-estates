@@ -61,9 +61,9 @@ const Navbar = () => {
               </ul>
             </div>
             {/* Logo */}
-            <a href="/" className="inline-block">
+            <Link to="/" className="inline-block">
               <img className="w-24" src={logoImg} alt="Logo" />
-            </a>
+            </Link>
           </div>
 
           {/* Navbar Center */}

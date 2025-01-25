@@ -3,7 +3,7 @@ import { FaTrash } from "react-icons/fa";
 
 const UserBtns = ({ email, makeRoleChange }) => {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 items-center justify-center">
       <button
         onClick={() => makeRoleChange(email, "admin")}
         className="text-sm font-bold px-3 py-2 border rounded-md text-white bg-btncol hover:text-btncol hover:bg-inherit transition-all duration-150 border-btncol">
@@ -27,7 +27,7 @@ const AgentBtn = ({ makeRoleChange, email, makeFraud, fraud }) => {
   }
   return (
     <>
-      <div>
+      <div className="flex gap-2 items-center justify-center">
         <button
           className="text-sm font-bold px-3 py-2 border rounded-md text-white bg-btncol hover:text-btncol hover:bg-inherit transition-all duration-150 border-btncol"
           onClick={() => makeRoleChange(email, "admin")}>
@@ -44,13 +44,13 @@ const AgentBtn = ({ makeRoleChange, email, makeFraud, fraud }) => {
 };
 const AdminBtn = ({ email, makeRoleChange }) => {
   return (
-    <>
+    <div className="flex items-center justify-center">
       <button
         onClick={() => makeRoleChange(email, "user")}
         className="text-sm font-bold px-3 py-2 border rounded-md text-white bg-cyan-400 hover:text-cyan-400 hover:bg-inherit transition-all duration-150 border-cyan-400">
         Make User
       </button>
-    </>
+    </div>
   );
 };
 
