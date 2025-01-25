@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser?.email) {
         const userInfo = { email: currentUser.email };
         try {
-          const roleRes = await axiosPublic.get("/users", userInfo);
+          const roleRes = await axiosPublic.get("/users", { params: userInfo });
           const role = roleRes.data?.role;
           // axiosPublic.get("/jwt", userInfo).then((res) => {
           //   if (res.data?.token) {
@@ -58,7 +58,10 @@ const AuthProvider = ({ children }) => {
           // });
           let updatedUser;
           if (role === "agent") {
-            const fraud = await axiosPublic.get("/user-fraud", userInfo);
+            const res = await axiosPublic.get("/user-fraud", {
+              params: userInfo,
+            });
+            const fraud = res.data?.fraud;
             updatedUser = {
               ...currentUser,
               role: role || "user",
