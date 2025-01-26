@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router";
+import Heading from "../../../shared/Heading";
 
 const AddProperty = () => {
   const { user, loading, setLoading } = useContext(AuthContext);
@@ -74,7 +75,7 @@ const AddProperty = () => {
     try {
       setLoading(true);
       const photoURL = await uploadImage(photo);
-  
+
       const property = {
         title: title,
         location: location,
@@ -95,7 +96,6 @@ const AddProperty = () => {
       toast.success("successfully Added Property");
       navigate("/dashboard/added-properties");
     } catch (error) {
-   
       toast.error(
         "There was an error while adding property. Please try again later"
       );
@@ -116,6 +116,15 @@ const AddProperty = () => {
   if (loading) {
     return <Loading />;
   }
+
+  if (user?.fraud) {
+    return (
+      <div>
+        <Heading largeHead={"Fraud user cannot add any properties"} />
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto">
       <div className="my-24 border max-w-2xl  border-gray-200 px-4 pt-10 pb-4 rounded-md md:w-[80%] mx-auto">

@@ -60,7 +60,7 @@ const Register = () => {
       if (!photoURL) {
         throw new Error("Problem occured while uploading image");
       }
-      await createUser(email, password);
+  await createUser(email, password);
 
       await updateUser({ displayName: name, photoURL: photoURL });
 
@@ -74,7 +74,7 @@ const Register = () => {
       toast.success("successfully created Account");
       navigate("/");
     } catch (error) {
-    
+      console.log(error);
       toast.error("Unexpected error occured While creating user");
     } finally {
       setLoading(false);
@@ -131,7 +131,6 @@ const Register = () => {
       toast.success("User added successfully");
       navigate("/");
     } catch (error) {
-
       toast.error("Error during Google login.");
     } finally {
       setError("");

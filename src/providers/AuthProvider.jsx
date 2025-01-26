@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
           const roleRes = await axiosPublic.get("/users", { params: userInfo });
           const role = roleRes.data?.role;
           axiosPublic.post("/jwt", userInfo).then((res) => {
-            console.log(res.data)
+            console.log(res.data);
             if (res.data?.token) {
               localStorage.setItem("token", res.data.token);
             }
@@ -101,6 +101,7 @@ const AuthProvider = ({ children }) => {
     logOut,
     setLoading,
     googleLogin,
+    setUser,
     updateUser,
   };
 
