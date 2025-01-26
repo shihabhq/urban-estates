@@ -64,12 +64,17 @@ const AuthProvider = ({ children }) => {
             const fraud = res.data?.fraud;
             updatedUser = {
               ...currentUser,
-              role: role || "user",
+              role: role || "agent",
               fraud: fraud || false,
             };
           } else {
             updatedUser = { ...currentUser, role: role || "user" };
           }
+          updatedUser = {
+            ...updatedUser,
+            displayName: currentUser.displayName,
+            photoURL: currentUser.photoURL,
+          };
 
           setUser(updatedUser);
         } catch (error) {

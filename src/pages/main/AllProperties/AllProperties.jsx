@@ -13,7 +13,7 @@ const AllProperties = () => {
       return res.data;
     },
   });
-  console.log(data);
+
   if (isLoading) {
     return <Loading />;
   }

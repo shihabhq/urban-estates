@@ -74,7 +74,7 @@ const AddProperty = () => {
     try {
       setLoading(true);
       const photoURL = await uploadImage(photo);
-      console.log(photoURL);
+  
       const property = {
         title: title,
         location: location,
@@ -95,7 +95,7 @@ const AddProperty = () => {
       toast.success("successfully Added Property");
       navigate("/dashboard/added-properties");
     } catch (error) {
-      console.log(error);
+   
       toast.error(
         "There was an error while adding property. Please try again later"
       );

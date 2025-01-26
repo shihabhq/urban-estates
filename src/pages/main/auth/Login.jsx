@@ -27,7 +27,7 @@ const Login = () => {
     try {
       await loginUser(email, password);
       toast.success("User LoggedIn successfully");
-      navigate(location?.state ? location.state : "/");
+      navigate("/");
     } catch (err) {
       toast.error("Error Occured: " + err);
     } finally {

@@ -22,6 +22,7 @@ import SoldProperties from "../pages/dashboard/Agent/SoldProperties";
 import UpdateProperty from "../pages/dashboard/Agent/UpdateProperty";
 import PropertyDetails from "../pages/main/propertydetails/PropertyDetails";
 import MakeOffer from "../pages/dashboard/User/MakeOffer";
+import PaymentPage from "../pages/dashboard/User/PaymentPage";
 
 const AllRoutes = () => {
   return (
@@ -69,6 +70,14 @@ const AllRoutes = () => {
         <Route path="sold-properties" element={<SoldProperties />} />
         <Route path="update/:id" element={<UpdateProperty />} />
         <Route path="offer/:id" element={<MakeOffer />} />
+        <Route
+          path="payment"
+          element={
+            <PrivateRoute>
+              <PaymentPage />
+            </PrivateRoute>
+          }
+        />
 
         <Route path="*" element={<Notfound />} />
       </Route>

@@ -1,7 +1,20 @@
 import { MdOutlineLocationOn } from "react-icons/md";
 import { Link } from "react-router";
 
-const PropertiesBoughtCard = ({ property, agent, status, date, amount }) => {
+const PropertiesBoughtCard = ({
+  property,
+  agent,
+  status,
+  amount,
+  id,
+  transactionId,
+}) => {
+  const forPayObj = {
+    id,
+    ...property,
+
+    amount,
+  };
   return (
     <div className="card card-compact mx-auto w-full bg-base-100 max-w-96 shadow-xl">
       <figure>
@@ -36,9 +49,15 @@ const PropertiesBoughtCard = ({ property, agent, status, date, amount }) => {
         </div>
         <div className="card-actions justify-end gap-3">
           {status === "accepted" && (
-            <Link className="px-4 py-2 rounded-md text-btnsuccess text-sm font-semibold cursor-pointer border border-btnsuccess hover:bg-btnsuccess hover:text-white transition-all">
+            <Link
+              to={"/dashboard/payment"}
+              state={forPayObj}
+              className="px-4 py-2 rounded-md text-btnsuccess text-sm font-semibold cursor-pointer border border-btnsuccess hover:bg-btnsuccess hover:text-white transition-all">
               Pay
             </Link>
+          )}
+          {status === "bought" && transactionId && (
+            <p className="text-sm font-medium">Transaction ID: {transactionId}</p>
           )}
         </div>
       </div>

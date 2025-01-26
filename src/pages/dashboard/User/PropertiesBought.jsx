@@ -19,7 +19,6 @@ const PropertiesBought = () => {
     enabled: !!user?.email,
   });
 
-
   if (loading || isLoading) {
     return <Loading />;
   }
@@ -35,6 +34,8 @@ const PropertiesBought = () => {
           return (
             <PropertiesBoughtCard
               key={item._id}
+              id={item._id}
+              transactionId={item?.transactionId}
               agent={item.agent}
               property={item.property}
               amount={item.offerAmount}

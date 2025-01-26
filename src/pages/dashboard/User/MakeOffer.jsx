@@ -53,7 +53,7 @@ const MakeOffer = () => {
 
       if (response.status === 201) {
         await axiosSecure.delete(`/wishlist/${id}`);
-        console.log(id);
+    
         toast.success("Made offer successfully");
         navigate("/dashboard/bought");
       }

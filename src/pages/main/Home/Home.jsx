@@ -1,4 +1,5 @@
 import FeaturedProperties from "./components/FeaturedProperties";
+import RecentReviews from "./components/RecentReviews";
 import Slider from "./components/Slider";
 
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
     <div>
       <Slider />
       <FeaturedProperties />
+      <RecentReviews />
     </div>
   );
 };

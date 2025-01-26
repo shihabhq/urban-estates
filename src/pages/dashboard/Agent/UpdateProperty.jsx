@@ -101,7 +101,7 @@ const UpdateProperty = () => {
       toast.success("Property updated successfully");
       navigate("/dashboard/added-properties");
     } catch (e) {
-      console.log(e);
+    
       toast.error("Unexpected error occured while updating property");
     }
   };

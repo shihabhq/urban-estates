@@ -14,7 +14,7 @@ const ReviewModal = ({
   const { axiosSecure } = useAxiosSecure();
 
   // Handle form submission (you can adjust this based on your needs)
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
 
     setReview("");
     if (!review) {
@@ -43,6 +43,7 @@ const ReviewModal = ({
 
   // Don't render the modal if isOpen is false
   if (!isOpen) return null;
+  console.log(user)
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">

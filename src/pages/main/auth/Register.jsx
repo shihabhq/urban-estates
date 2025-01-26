@@ -15,8 +15,15 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [photo, setPhoto] = useState("");
-  const { user, loading, createUser, setLoading, googleLogin, updateUser } =
-    useContext(AuthContext);
+  const {
+    user,
+    loading,
+    createUser,
+    setLoading,
+    googleLogin,
+    setUser,
+    updateUser,
+  } = useContext(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const { axiosPublic } = useAxiosNormal();
@@ -56,6 +63,7 @@ const Register = () => {
       await createUser(email, password);
 
       await updateUser({ displayName: name, photoURL: photoURL });
+
       const userInfo = {
         name: name,
         email: email,
@@ -66,7 +74,7 @@ const Register = () => {
       toast.success("successfully created Account");
       navigate("/");
     } catch (error) {
-      console.log(error);
+    
       toast.error("Unexpected error occured While creating user");
     } finally {
       setLoading(false);
@@ -123,7 +131,7 @@ const Register = () => {
       toast.success("User added successfully");
       navigate("/");
     } catch (error) {
-      console.log(error);
+
       toast.error("Error during Google login.");
     } finally {
       setError("");
