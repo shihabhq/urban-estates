@@ -51,11 +51,12 @@ const AuthProvider = ({ children }) => {
         try {
           const roleRes = await axiosPublic.get("/users", { params: userInfo });
           const role = roleRes.data?.role;
-          // axiosPublic.get("/jwt", userInfo).then((res) => {
-          //   if (res.data?.token) {
-          //     localStorage.setItem("token", res.data.token);
-          //   }
-          // });
+          axiosPublic.post("/jwt", userInfo).then((res) => {
+            console.log(res.data)
+            if (res.data?.token) {
+              localStorage.setItem("token", res.data.token);
+            }
+          });
           let updatedUser;
           if (role === "agent") {
             const res = await axiosPublic.get("/user-fraud", {
@@ -83,6 +84,7 @@ const AuthProvider = ({ children }) => {
 
         setLoading(false);
       } else {
+        localStorage.removeItem("token");
         setUser(null);
       }
 

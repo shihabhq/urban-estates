@@ -24,7 +24,7 @@ const FeaturedProperties = () => {
   }
 
   return (
-    <div>
+    <div className="mt-40">
       <Heading largeHead={"Featured Properties"} />
       <div className="container mx-auto grid gap-y-16 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {data.map((property) => {

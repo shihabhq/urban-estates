@@ -23,6 +23,10 @@ import UpdateProperty from "../pages/dashboard/Agent/UpdateProperty";
 import PropertyDetails from "../pages/main/propertydetails/PropertyDetails";
 import MakeOffer from "../pages/dashboard/User/MakeOffer";
 import PaymentPage from "../pages/dashboard/User/PaymentPage";
+import Adverstise from "../pages/dashboard/Admin/Adverstise";
+import UserRoute from "./UserRoute";
+import AdminRoute from "./AdminRoute";
+import AgentRoute from "./AgentRoute";
 
 const AllRoutes = () => {
   return (
@@ -49,7 +53,13 @@ const AllRoutes = () => {
         <Route path="register" element={<Register />} />
         <Route path="*" element={<Notfound />} />
       </Route>
-      <Route path="/dashboard" element={<DashboardLayout />}>
+      <Route
+        path="/dashboard"
+        element={
+          <PrivateRoute>
+            <DashboardLayout />
+          </PrivateRoute>
+        }>
         <Route
           path="profile"
           element={
@@ -58,24 +68,116 @@ const AllRoutes = () => {
             </PrivateRoute>
           }
         />
-        <Route path="wishlist" element={<WishList />} />
-        <Route path="bought" element={<PropertiesBought />} />
-        <Route path="my-reviews" element={<MyReviews />} />
-        <Route path="manage-properties" element={<ManageProperties />} />
-        <Route path="manage-users" element={<ManageUsers />} />
-        <Route path="manage-reviews" element={<ManageReviews />} />
-        <Route path="add-property" element={<AddProperty />} />
-        <Route path="added-properties" element={<AddedProperties />} />
-        <Route path="requested-properties" element={<RequestedProperties />} />
-        <Route path="sold-properties" element={<SoldProperties />} />
-        <Route path="update/:id" element={<UpdateProperty />} />
-        <Route path="offer/:id" element={<MakeOffer />} />
+        <Route
+          path="wishlist"
+          element={
+            <UserRoute>
+              <WishList />
+            </UserRoute>
+          }
+        />
+        <Route
+          path="bought"
+          element={
+            <UserRoute>
+              <PropertiesBought />
+            </UserRoute>
+          }
+        />
+        <Route
+          path="my-reviews"
+          element={
+            <UserRoute>
+              <MyReviews />
+            </UserRoute>
+          }
+        />
+        <Route
+          path="manage-properties"
+          element={
+            <AdminRoute>
+              <ManageProperties />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="manage-users"
+          element={
+            <AdminRoute>
+              <ManageUsers />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="manage-reviews"
+          element={
+            <AdminRoute>
+              <ManageReviews />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="advertise-properties"
+          element={
+            <AdminRoute>
+              <Adverstise />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="add-property"
+          element={
+            <AgentRoute>
+              <AddProperty />
+            </AgentRoute>
+          }
+        />
+        <Route
+          path="added-properties"
+          element={
+            <AgentRoute>
+              <AddedProperties />
+            </AgentRoute>
+          }
+        />
+        <Route
+          path="requested-properties"
+          element={
+            <AgentRoute>
+              <RequestedProperties />
+            </AgentRoute>
+          }
+        />
+        <Route
+          path="sold-properties"
+          element={
+            <AgentRoute>
+              <SoldProperties />
+            </AgentRoute>
+          }
+        />
+        <Route
+          path="update/:id"
+          element={
+            <AgentRoute>
+              <UpdateProperty />
+            </AgentRoute>
+          }
+        />
+        <Route
+          path="offer/:id"
+          element={
+            <UserRoute>
+              <MakeOffer />
+            </UserRoute>
+          }
+        />
         <Route
           path="payment"
           element={
-            <PrivateRoute>
+            <UserRoute>
               <PaymentPage />
-            </PrivateRoute>
+            </UserRoute>
           }
         />
 
