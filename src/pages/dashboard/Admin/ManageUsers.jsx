@@ -29,32 +29,7 @@ const ManageUsers = () => {
       await axiosSecure.patch(`/user/${email}`, { role: role });
       refetch();
     } catch (error) {
-      console.log(error);
       toast.error("there was an error while updating role");
-    }
-  };
-
-  const makeFraud = async (email) => {
-    try {
-      await axiosSecure.patch("/user-fraud", { email });
-      refetch();
-    } catch (error) {
-      toast.error("Problem while making the agent fraud");
-    }
-  };
-
-  const deleteUser = async (email) => {
-    setLoading(true);
-    try {
-      await axiosSecure.delete(`/users/${email}`);
-      refetch();
-      toast.success("User deleted successfully");
-      //how to delete the user from firebase as well?
-    } catch (error) {
-      console.log(error);
-      toast.error("Problem while deleting the agent");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -77,15 +52,14 @@ const ManageUsers = () => {
               <th>Email</th>
               <th className="w-fit">Role</th>
               <th className="text-center">Role Actions</th>
-              <th></th>
+              
             </tr>
           </thead>
           <tbody>
             {users?.map((user) => {
               return (
                 <UserRow
-                  deleteUser={deleteUser}
-                  makeFraud={makeFraud}
+            
                   key={user._id}
                   currentUser={currentUser}
                   user={user}

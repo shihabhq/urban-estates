@@ -18,9 +18,7 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+
   const { axiosPublic } = useAxiosNormal();
 
   const loginUser = (email, password) => {
@@ -52,32 +50,11 @@ const AuthProvider = ({ children }) => {
           const roleRes = await axiosPublic.get("/users", { params: userInfo });
           const role = roleRes.data?.role;
           axiosPublic.post("/jwt", userInfo).then((res) => {
-            console.log(res.data);
             if (res.data?.token) {
               localStorage.setItem("token", res.data.token);
             }
           });
-          let updatedUser;
-          if (role === "agent") {
-            const res = await axiosPublic.get("/user-fraud", {
-              params: userInfo,
-            });
-            const fraud = res.data?.fraud;
-            updatedUser = {
-              ...currentUser,
-              role: role || "agent",
-              fraud: fraud || false,
-            };
-          } else {
-            updatedUser = { ...currentUser, role: role || "user" };
-          }
-          updatedUser = {
-            ...updatedUser,
-            displayName: currentUser.displayName,
-            photoURL: currentUser.photoURL,
-          };
-
-          setUser(updatedUser);
+          setUser({ ...currentUser, role: role || "user" });
         } catch (error) {
           toast.error("something went wrong");
         }

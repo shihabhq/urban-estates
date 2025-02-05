@@ -63,7 +63,6 @@ const PropertyDetails = () => {
     setOpen(false);
   };
 
-
   if (isLoading || loading) {
     return <Loading />;
   }
@@ -101,13 +100,7 @@ const PropertyDetails = () => {
               </p>
             </div>
 
-            <div className="flex items-center mb-2 text-sm font-semibold">
-              Verification Status:
-              <span className="border px-1 rounded-full ml-1 border-green-500 text-green-500">
-                {" "}
-                {data?.status}
-              </span>
-            </div>
+
             <div>
               <h1 className="text-sm font-semibold">Agent:</h1>
               <div className="flex justify-start flex-col sm:flex-row items-center gap-4 my-4">
@@ -135,7 +128,9 @@ const PropertyDetails = () => {
                 </div>
               </div>
             ) : (
-              ""
+              <p className="text-sm font-bold text-red-500 text-end">
+                Only loggedIn Users Can purchase
+              </p>
             )}
           </div>
           <ReviewModal

@@ -30,7 +30,7 @@ const PropertiesBoughtCard = ({
         <p className="text-base font-bold flex items-center ">
           <MdOutlineLocationOn /> {property?.location}
         </p>
-        <p className="text-base font-bold">Offered Amount: {amount}</p>
+        <p className="text-base font-bold">Offered Amount: ${amount}</p>
         <p className="text-sm font-bold">
           Status:{" "}
           <span
@@ -57,7 +57,9 @@ const PropertiesBoughtCard = ({
             </Link>
           )}
           {status === "bought" && transactionId && (
-            <p className="text-sm font-medium">Transaction ID: {transactionId}</p>
+            <p className="text-sm font-medium">
+              Transaction ID: {transactionId}
+            </p>
           )}
         </div>
       </div>

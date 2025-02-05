@@ -21,19 +21,7 @@ const AllPropertiesCard = ({ property }) => {
         <p className="text-base font-bold">
           Price Range: ${property?.price.min} - ${property?.price.max}
         </p>
-        <p className="text-sm font-bold">
-          Verification Status:{" "}
-          <span
-            className={`px-2 py-1 rounded-full font-medium border ${
-              property?.status === "verified"
-                ? "border-green-500 text-green-500"
-                : property?.status === "pending"
-                ? "border-yellow-500 text-yellow-500"
-                : "border-red-500 text-red-500"
-            }`}>
-            {property?.status}
-          </span>
-        </p>
+ 
         <div>
           <h1 className="text-sm font-semibold">Agent:</h1>
           <div className="flex flex-col items-center gap-4 my-2">

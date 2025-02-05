@@ -33,22 +33,8 @@ const AllRoutes = () => {
     <Routes>
       <Route element={<MainLayout />}>
         <Route path="/" index element={<Home />} />
-        <Route
-          path="all-properties"
-          element={
-            <PrivateRoute>
-              <AllProperties />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/details/:id"
-          element={
-            <PrivateRoute>
-              <PropertyDetails />
-            </PrivateRoute>
-          }
-        />
+        <Route path="all-properties" element={<AllProperties />} />
+        <Route path="/details/:id" element={<PropertyDetails />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="*" element={<Notfound />} />
@@ -59,7 +45,8 @@ const AllRoutes = () => {
           <PrivateRoute>
             <DashboardLayout />
           </PrivateRoute>
-        }>
+        }
+      >
         <Route
           path="profile"
           element={

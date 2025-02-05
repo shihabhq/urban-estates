@@ -18,7 +18,7 @@ const Adverstise = () => {
       return res.data;
     },
   });
-  console.log(properties);
+
   const handleAdvertise = async (id) => {
     try {
       const res = await axiosSecure.patch(`/advertise-property/${id}`, {
@@ -27,7 +27,6 @@ const Adverstise = () => {
       refetch();
       toast.success("Advertised Successfully");
     } catch (error) {
-      console.log(error)
       toast.error("Unexpected error occured while verifying");
     }
   };

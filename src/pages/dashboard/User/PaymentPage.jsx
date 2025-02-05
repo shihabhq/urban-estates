@@ -8,11 +8,9 @@ import CheckoutForm from "./components/CheckoutForm";
 
 const PaymentPage = () => {
   const { state } = useLocation();
-  console.log(state);
 
   const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_KEY);
 
-  console.log(state);
   return (
     <div>
       <Heading largeHead={"Payment"} />

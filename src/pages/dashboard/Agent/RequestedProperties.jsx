@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import Heading from "../../../shared/Heading";
 import AuthContext from "../../../contexts/AuthContexts";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -11,7 +11,7 @@ const RequestedProperties = () => {
   const { user, loading } = useContext(AuthContext);
   const { axiosSecure } = useAxiosSecure();
 
-  const { data, isError, isLoading, refetch } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["agent-offers"],
     queryFn: async () => {
       const response = await axiosSecure.get(`/offers/agent/${user.email}`);
@@ -19,8 +19,9 @@ const RequestedProperties = () => {
     },
     enabled: !!user?.email,
   });
+  console.log(data);
 
-  const handleAccept = async (id,propertyId) => {
+  const handleAccept = async (id, propertyId) => {
     try {
       const response = await axiosSecure.patch(`/offer-update/${id}`, {
         status: "accepted",
@@ -33,7 +34,6 @@ const RequestedProperties = () => {
         toast.success("Offer Accepted");
       }
     } catch (error) {
- 
       toast.error("there was an error while updating role");
     }
   };
@@ -89,7 +89,9 @@ const RequestedProperties = () => {
               return (
                 <RequestRow
                   handleReject={() => handleReject(offer._id)}
-                  handleAccept={() => handleAccept(offer._id,offer.property._id)}
+                  handleAccept={() =>
+                    handleAccept(offer._id, offer.property._id)
+                  }
                   key={offer._id}
                   amount={offer.offerAmount}
                   buyer={offer.buyer}

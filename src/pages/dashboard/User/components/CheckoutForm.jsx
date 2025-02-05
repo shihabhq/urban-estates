@@ -42,7 +42,6 @@ const CheckoutForm = ({ state }) => {
       setError(error.message);
     } else {
       setError("");
-      console.log(paymentMethod);
     }
 
     //confirm payment

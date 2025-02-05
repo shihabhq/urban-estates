@@ -12,7 +12,8 @@ const NavBtn = ({ children, to }) => {
         `font-arial font-semibold text-base hover:bg-inherit focus:bg-inherit active:bg-transparent shadow-none px-0 py-0 rounded-none duration-200 transition-[color] mx-4 hover:text-btncol ${
           isActive ? "active-nav" : ""
         }`
-      }>
+      }
+    >
       {children}
     </NavLink>
   );
@@ -34,7 +35,8 @@ const Navbar = () => {
                   className="h-5 w-5"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke="currentColor">
+                  stroke="currentColor"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -45,7 +47,8 @@ const Navbar = () => {
               </button>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 flex flex-col gap-2 py-4 rounded-box z-[999] mt-3 w-52 p-2 shadow">
+                className="menu menu-sm dropdown-content bg-base-100 flex flex-col gap-2 py-4 rounded-box z-[999] mt-3 w-52 p-2 shadow"
+              >
                 <li>
                   <NavBtn to={"/"}>Home</NavBtn>
                 </li>
@@ -81,13 +84,17 @@ const Navbar = () => {
           {/* Navbar End */}
           <div className="navbar-end hidden sm:flex gap-4">
             {user ? (
-              <div onClick={logOut}>
-                <ButtonOutlined>Log Out</ButtonOutlined>
-              </div>
+              <>
+                <div onClick={logOut}>
+                  <ButtonOutlined>Log Out</ButtonOutlined>
+                </div>
+                <ButtonOutlined to={"/dashboard/profile"}>
+                  Dashboard
+                </ButtonOutlined>
+              </>
             ) : (
               <ButtonOutlined to={"/login"}>Login</ButtonOutlined>
             )}
-            <ButtonOutlined to={"/dashboard/profile"}>Dashboard</ButtonOutlined>
           </div>
         </div>
       </div>

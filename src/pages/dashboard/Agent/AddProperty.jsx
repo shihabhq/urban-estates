@@ -117,14 +117,6 @@ const AddProperty = () => {
     return <Loading />;
   }
 
-  if (user?.fraud) {
-    return (
-      <div>
-        <Heading largeHead={"Fraud user cannot add any properties"} />
-      </div>
-    );
-  }
-
   return (
     <div className="container mx-auto">
       <div className="my-24 border max-w-2xl  border-gray-200 px-4 pt-10 pb-4 rounded-md md:w-[80%] mx-auto">

@@ -18,7 +18,6 @@ const SoldProperties = () => {
     },
     enabled: !!user?.email,
   });
-  console.log(data);
 
   if (isLoading || loading) {
     return <Loading />;

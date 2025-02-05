@@ -8,6 +8,7 @@ import AuthContext from "../../../contexts/AuthContexts";
 import axios from "axios";
 import Loading from "../../../shared/Loading";
 import useAxiosNormal from "../../../hooks/useAxiosNormal";
+import auth from "../../../firebase/firebaseConfig";
 
 const Register = () => {
   const [photoPreview, setPhotoPreview] = useState(null);
@@ -56,13 +57,20 @@ const Register = () => {
     }
     setError("");
     try {
+      await createUser(email, password);
+
       const photoURL = await uploadImage(photo);
       if (!photoURL) {
         throw new Error("Problem occured while uploading image");
       }
-  await createUser(email, password);
-
       await updateUser({ displayName: name, photoURL: photoURL });
+
+      const updatedUser = auth.currentUser;
+      setUser((prev) => ({
+        ...prev,
+        displayName: updatedUser.displayName,
+        photoURL: updatedUser.photoURL,
+      }));
 
       const userInfo = {
         name: name,
@@ -74,7 +82,6 @@ const Register = () => {
       toast.success("successfully created Account");
       navigate("/");
     } catch (error) {
-      console.log(error);
       toast.error("Unexpected error occured While creating user");
     } finally {
       setLoading(false);
@@ -153,7 +160,8 @@ const Register = () => {
         style={{
           backgroundImage:
             "url('https://th.bing.com/th/id/R.6405efc53e267b121f3c5965b6d0ea3f?rik=i1UOgy64UFRz9w&pid=ImgRaw&r=0')",
-        }}>
+        }}
+      >
         <div className="absolute inset-0 bg-black bg-opacity-80"></div>
       </div>
       <div className=" w-[90%] mx-auto sm:w-full sm:max-w-md">
@@ -192,7 +200,8 @@ const Register = () => {
             <div className="flex flex-col items-center justify-center">
               <label
                 htmlFor="file-upload"
-                className="cursor-pointer px-4 py-2 bg-btncol text-white rounded-md hover:bg-inherit hover:text-btncol border border-btncol transition-all duration-200">
+                className="cursor-pointer px-4 py-2 bg-btncol text-white rounded-md hover:bg-inherit hover:text-btncol border border-btncol transition-all duration-200"
+              >
                 Upload Photo
               </label>
               <input
@@ -216,7 +225,8 @@ const Register = () => {
             <div>
               <button
                 onClick={handleSubmit}
-                className="block px-6 py-2 border border-btncol font-medium text-white bg-btncol text-lg hover:bg-inherit font-poppins rounded-sm hover:text-btncol transition-all text-center duration-200 w-full">
+                className="block px-6 py-2 border border-btncol font-medium text-white bg-btncol text-lg hover:bg-inherit font-poppins rounded-sm hover:text-btncol transition-all text-center duration-200 w-full"
+              >
                 Register
               </button>
               <p className="text-sm text-red-500 ">{error && error}</p>
@@ -238,7 +248,8 @@ const Register = () => {
             <div className="mt-6">
               <button
                 onClick={handleGoogleRegistration}
-                className="w-full flex justify-center py-2 px-4 border border-btncol rounded-md shadow-sm text-sm font-medium bg-white transition-all hover:bg-btncol hover:text-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-btncol">
+                className="w-full flex justify-center py-2 px-4 border border-btncol rounded-md shadow-sm text-sm font-medium bg-white transition-all hover:bg-btncol hover:text-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-btncol"
+              >
                 <FaGoogle className="mr-2 h-5 w-5" />
                 Register with Google
               </button>
@@ -249,7 +260,8 @@ const Register = () => {
             Already a member?{" "}
             <Link
               to="/login"
-              className="font-medium text-btncol hover:underline">
+              className="font-medium text-btncol hover:underline"
+            >
               login
             </Link>
           </p>
