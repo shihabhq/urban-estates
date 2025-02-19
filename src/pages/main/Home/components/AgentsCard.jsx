@@ -21,7 +21,7 @@ const AgentCard = ({ name, title, src }) => {
 
 const Agents = () => {
   return (
-    <div className="mt-52">
+    <div className="mt-40">
       <Heading largeHead={"Our Trusted Agents"} />
       <div className="container mx-auto my-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <AgentCard name="Hasib Omor" title="2nd Class Broker" src={agent1} />

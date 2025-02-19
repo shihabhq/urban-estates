@@ -59,7 +59,7 @@ const Slider = () => {
         <div className="relative w-full h-fit max-w-xl">
           <input
             type="text"
-            placeholder="Type here"
+            placeholder="Search for properties"
             className="input input-bordered w-full py-6"
             aria-label="Search input"
           />
