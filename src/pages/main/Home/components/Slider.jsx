@@ -20,7 +20,6 @@ const AnimateText = () => {
       deleteSpeed={80}
       delaySpeed={4000}
       loop={true}
-      
     />
   );
 };
@@ -35,7 +34,8 @@ const Slider = () => {
           delay: 4000,
           disableOnInteraction: false,
         }}
-        className="mySwiper h-full">
+        className="mySwiper h-full"
+      >
         <SwiperSlide>
           <SingleSlider src={img1} />
         </SwiperSlide>
@@ -56,26 +56,31 @@ const Slider = () => {
             <AnimateText />
           </span>
         </h1>
-        <div className="relative w-full max-w-xl" >
+        <div className="relative w-full h-fit max-w-xl">
           <input
             type="text"
             placeholder="Type here"
             className="input input-bordered w-full py-6"
             aria-label="Search input"
           />
-          <div className="absolute top-1/2 right-2 transform -translate-y-1/2">
+          <div className="absolute top-0 right-0 h-full">
             <Link
               to="/"
-              className="text-lg flex text-white items-center justify-center gap-3 font-poppins font-semibold bg-btncol hover:bg-btnhov px-3 py-2 rounded-sm transition-all duration-200"
-              aria-label="Search button">
+              className=" flex h-full text-white items-center 
+              text-base justify-center rounded-r-md gap-3 font-poppins font-semibold
+               bg-btncol hover:bg-btnhov px-3 transition-all duration-200"
+              aria-label="Search button"
+            >
               Search
             </Link>
           </div>
-          
         </div>
         <div>
-            <ButtonCovered to={'/all-properties'}  > See All Properties <FaArrowRight /> </ButtonCovered>
-          </div>
+          <ButtonCovered to={"/all-properties"}>
+            {" "}
+            See All Properties <FaArrowRight />{" "}
+          </ButtonCovered>
+        </div>
       </div>
     </div>
   );

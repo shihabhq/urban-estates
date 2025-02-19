@@ -55,12 +55,38 @@ const Navbar = () => {
                 <li>
                   <NavBtn to={"/all-properties"}>All Properties</NavBtn>
                 </li>
-                <li className="inline-block sm:hidden">
-                  <ButtonOutlined to={"/login"}>Login</ButtonOutlined>
+                <li>
+                  <NavBtn to={"/developers"}>Developers</NavBtn>
                 </li>
-                <li className="inline-block sm:hidden">
-                  <ButtonOutlined to={"/dashboard"}>Dashboard</ButtonOutlined>
+                <li>
+                  <NavBtn to={"/careers"}>Careers</NavBtn>
                 </li>
+                <li>
+                  <NavBtn to={"/contact"}>Contact Us</NavBtn>
+                </li>
+                {user ? (
+                  <>
+                    <li className="inline-block sm:hidden">
+                      <ButtonOutlined to={"/dashboard"}>
+                        Dashboard
+                      </ButtonOutlined>
+                    </li>
+                      <div onClick={logOut}>
+                    <li className="inline-block sm:hidden w-full">
+                        <ButtonOutlined>LogOut</ButtonOutlined>
+                    </li>
+                      </div>
+                  </>
+                ) : (
+                  <>
+                    <li className="inline-block sm:hidden">
+                      <ButtonOutlined to={"/login"}>Login</ButtonOutlined>
+                    </li>
+                    <li className="inline-block sm:hidden">
+                      <ButtonOutlined to={"/register"}>Register</ButtonOutlined>
+                    </li>
+                  </>
+                )}
               </ul>
             </div>
             {/* Logo */}
@@ -79,19 +105,19 @@ const Navbar = () => {
                 <NavBtn to={"/all-properties"}>All Properties</NavBtn>
               </li>
               <li>
-                <NavBtn to={"/all-properties"}>Developers</NavBtn>
+                <NavBtn to={"/developers"}>Developers</NavBtn>
               </li>
               <li>
-                <NavBtn to={"/all-properties"}>Careers</NavBtn>
+                <NavBtn to={"/careers"}>Careers</NavBtn>
               </li>
               <li>
-                <NavBtn to={"/all-properties"}>Contact Us</NavBtn>
+                <NavBtn to={"/contact"}>Contact Us</NavBtn>
               </li>
             </ul>
           </div>
 
           {/* Navbar End */}
-          <div className="navbar-end hidden sm:flex items-end justify-end  gap-4">
+          <div className="navbar-end hidden sm:flex items-end justify-end gap-4">
             {user ? (
               <>
                 <div onClick={logOut}>

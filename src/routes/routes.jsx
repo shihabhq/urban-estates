@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router";
-import App from "../App";
 import MainLayout from "../layouts/MainLayout";
 import AllProperties from "../pages/main/AllProperties/AllProperties";
 import Login from "../pages/main/auth/Login";
@@ -27,6 +26,9 @@ import Adverstise from "../pages/dashboard/Admin/Adverstise";
 import UserRoute from "./UserRoute";
 import AdminRoute from "./AdminRoute";
 import AgentRoute from "./AgentRoute";
+import Career from "../pages/main/careers/Career";
+import Developers from "../pages/main/developers/Developers";
+import Contact from "../pages/main/Contact/Contact";
 
 const AllRoutes = () => {
   return (
@@ -34,7 +36,10 @@ const AllRoutes = () => {
       <Route element={<MainLayout />}>
         <Route path="/" index element={<Home />} />
         <Route path="all-properties" element={<AllProperties />} />
-        <Route path="/details/:id" element={<PropertyDetails />} />
+        <Route path="careers" element={<Career />} />
+        <Route path="developers" element={<Developers />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="details/:id" element={<PropertyDetails />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="*" element={<Notfound />} />
