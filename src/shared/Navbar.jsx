@@ -26,7 +26,7 @@ const Navbar = () => {
       <div className="shadow-md fixed w-full bg-base-100 z-[1000]">
         <div className="container mx-auto navbar bg-base-100 py-0 max-w-[1280px]">
           {/* Navbar Start */}
-          <div className="navbar-start">
+          <div className="navbar-start lg:w-auto flex items-center mr-8">
             {/* Mobile Dropdown */}
             <div className="dropdown">
               <button tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -64,8 +64,8 @@ const Navbar = () => {
               </ul>
             </div>
             {/* Logo */}
-            <Link to="/" className="inline-block">
-              <img className="w-24" src={logoImg} alt="Logo" />
+            <Link to="/" className="flex items-center">
+              <img className="max-w-24" src={logoImg} alt="Logo" />
             </Link>
           </div>
 
@@ -78,11 +78,20 @@ const Navbar = () => {
               <li>
                 <NavBtn to={"/all-properties"}>All Properties</NavBtn>
               </li>
+              <li>
+                <NavBtn to={"/all-properties"}>Developers</NavBtn>
+              </li>
+              <li>
+                <NavBtn to={"/all-properties"}>Careers</NavBtn>
+              </li>
+              <li>
+                <NavBtn to={"/all-properties"}>Contact Us</NavBtn>
+              </li>
             </ul>
           </div>
 
           {/* Navbar End */}
-          <div className="navbar-end hidden sm:flex gap-4">
+          <div className="navbar-end hidden sm:flex items-end justify-end  gap-4">
             {user ? (
               <>
                 <div onClick={logOut}>
@@ -93,7 +102,10 @@ const Navbar = () => {
                 </ButtonOutlined>
               </>
             ) : (
-              <ButtonOutlined to={"/login"}>Login</ButtonOutlined>
+              <>
+                <ButtonOutlined to={"/login"}>Login</ButtonOutlined>
+                <ButtonOutlined to={"/register"}>Register</ButtonOutlined>
+              </>
             )}
           </div>
         </div>
