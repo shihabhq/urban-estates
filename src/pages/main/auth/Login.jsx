@@ -34,6 +34,10 @@ const Login = () => {
       setLoading(false);
     }
   };
+  const handleDemoLogin = (email, password) => {
+    setEmail(email);
+    setPassword(password);
+  };
 
   const handleGoogleLogin = async () => {
     try {
@@ -69,8 +73,9 @@ const Login = () => {
         className="absolute inset-0 bg-cover bg-center -z-10"
         style={{
           backgroundImage:
-            "url('https://protywpv2.live.vithemes.com/wp-content/uploads/2024/11/ssc.webp')",
-        }}>
+            "url('https://res.cloudinary.com/deyzzky20/image/upload/v1739972365/quuijtjfpxgvx8btddde.webp')",
+        }}
+      >
         <div className="absolute inset-0 bg-black bg-opacity-80"></div>
       </div>
       <div className="w-[90%] mx-auto sm:w-full sm:max-w-md">
@@ -79,6 +84,34 @@ const Login = () => {
             <h2 className="mt-6 text-btncol text-center text-3xl font-extrabold">
               Login to your account
             </h2>
+          </div>
+          <div>
+            <h2 className="mt-6 text-btncol text-xl font-extrabold">
+              Demo login Credentials:
+            </h2>
+            <div className="flex justify-center gap-4 mb-4">
+              <button
+                className="text-xl font-semibold rounded-full px-8 py-2 text-white bg-btncol 
+              border border-btncol hover:text-btncol hover:bg-white transition-all"
+                onClick={() => handleDemoLogin("user@gmail.com", "User1@")}
+              >
+                User
+              </button>
+              <button
+                className="text-xl font-semibold rounded-full px-8 py-2 text-white bg-btncol 
+              border border-btncol hover:text-btncol hover:bg-white transition-all"
+                onClick={() => handleDemoLogin("admin@gmail.com", "Admin1@")}
+              >
+                Admin
+              </button>
+              <button
+                className="text-xl font-semibold rounded-full px-8 py-2 text-white bg-btncol 
+              border border-btncol hover:text-btncol hover:bg-white transition-all"
+                onClick={() => handleDemoLogin("agent1@gmail.com", "Agent1@")}
+              >
+                Agent
+              </button>
+            </div>
           </div>
           <form className=" mt-8 space-y-6" onSubmit={handleSubmit}>
             <Input
@@ -102,7 +135,8 @@ const Login = () => {
             <div>
               <button
                 type="Submit"
-                className="px-6 py-2 border border-btncol font-medium text-white bg-btncol text-lg hover:bg-inherit font-poppins rounded-sm hover:text-btncol transition-all text-center duration-200 w-full flex items-center justify-center">
+                className="px-6 py-2 border border-btncol font-medium text-white bg-btncol text-lg hover:bg-inherit font-poppins rounded-sm hover:text-btncol transition-all text-center duration-200 w-full flex items-center justify-center"
+              >
                 Login <IoIosLogIn size={20} />
               </button>
             </div>
@@ -123,7 +157,8 @@ const Login = () => {
             <div className="mt-6">
               <button
                 onClick={handleGoogleLogin}
-                className="w-full flex justify-center py-2 px-4 border rounded-md shadow-sm text-sm font-medium bg-white border-btncol transition-all text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 hover:bg-btncol hover:text-white focus:ring-btncol">
+                className="w-full flex justify-center py-2 px-4 border rounded-md shadow-sm text-sm font-medium bg-white border-btncol transition-all text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 hover:bg-btncol hover:text-white focus:ring-btncol"
+              >
                 <FaGoogle className="mr-2 h-5 w-5" />
                 Sign in with Google
               </button>
@@ -134,7 +169,8 @@ const Login = () => {
             Not a member?{" "}
             <Link
               to="/register"
-              className="font-medium text-btncol hover:underline">
+              className="font-medium text-btncol hover:underline"
+            >
               Register now
             </Link>
           </p>
