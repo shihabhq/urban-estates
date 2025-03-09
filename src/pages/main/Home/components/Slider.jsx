@@ -37,13 +37,13 @@ const Slider = () => {
         className="mySwiper h-full"
       >
         <SwiperSlide>
-          <SingleSlider src={img1} />
+          <SingleSlider src={"https://res.cloudinary.com/deyzzky20/image/upload/v1741407394/urbanestates/r8csjbtrxpzs83u4msfl.png"} />
         </SwiperSlide>
         <SwiperSlide>
-          <SingleSlider src={img2} />
+          <SingleSlider src={"https://res.cloudinary.com/deyzzky20/image/upload/v1741496467/urbanestates/oadmkmbnemmcz9ftvugz.png"} />
         </SwiperSlide>
         <SwiperSlide>
-          <img src={img3} alt="Food 1" className="w-full h-full object-cover" />
+          <img src={"https://res.cloudinary.com/deyzzky20/image/upload/v1741496468/urbanestates/deojibggyn2drtqt25ti.png"} alt="building 3" className="w-full h-full object-cover" />
         </SwiperSlide>
       </Swiper>
       <div className=" absolute top-[20%] z-40 max-w-2xl h-[25vh] md:h-[30vh] left-[10%] flex items-start flex-col pr-4 gap-4">

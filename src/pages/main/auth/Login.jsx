@@ -89,7 +89,7 @@ const Login = () => {
             <h2 className="mt-6 text-btncol text-xl font-extrabold">
               Demo login Credentials:
             </h2>
-            <div className="flex justify-center gap-4 mb-4">
+            <div className="flex justify-center flex-col mobile:flex-row gap-4 mb-4">
               <button
                 className="text-xl font-semibold rounded-full px-8 py-2 text-white bg-btncol 
               border border-btncol hover:text-btncol hover:bg-white transition-all"
